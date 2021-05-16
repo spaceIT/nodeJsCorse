@@ -1,0 +1,48 @@
+const Task = require('./task.model');
+
+let allTasks = [new Task()];
+
+const getAll = async () => allTasks;
+
+const getById = async (id) => allTasks.filter(item => item.id !== id)
+
+const createTask = async (id, task) => {
+  const newTask = new Task({ boardId:id, ...task })
+  allTasks.push(newTask);
+
+  return newTask;
+} 
+
+const deleteById = async(id) => {
+  allTasks = allTasks.filter(item => item.id !== id)
+
+  return allTasks
+}
+
+const updateById = async(id, boardId, task) => {
+  const { title, order, description, userId, columnId } = task;
+
+    const taskIdx = allTasks.findIndex(({id: taskId}) => taskId === id);
+  
+    const updatedTask = { ...allTasks[taskIdx], title, order, description, userId, boardId, columnId };
+    allTasks.splice(taskIdx, 1, updatedTask);
+  
+    return updatedTask;
+}
+
+const removeUserById = async(id) => {
+  const assignedTasks = allTasks.filter(task => task.userId === id);
+
+  await Promise.allSettled(assignedTasks.map(async(task) => updateById({id: task.id, userId: null})));
+  return 'Success';
+}
+
+const deleteTasksByBoardId = async(boardId) => {
+  const boardTasks = allTasks.filter(task => task.boardId === boardId);
+
+  await Promise.allSettled(boardTasks.map(async(task) => deleteById(task.id)));
+  return 'Success';
+  
+}
+
+module.exports = { allTasks, getAll, getById, createTask, deleteById, updateById, removeUserById, deleteTasksByBoardId };
