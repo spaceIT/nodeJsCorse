@@ -11,19 +11,19 @@ const createUser = async (user) => {
   users.push(newUser);
 
   return newUser;
-} 
+}
 
-const deleteById = async(id) => {
+const deleteById = async (id) => {
   const findedUser = getById(id);
   users = users.filter(item => item.id !== id)
 
   return findedUser
 }
 
-const updateById = async(id, user) => {
+const updateById = async (id, user) => {
   const findedUser = users.find(item => item.id === id)
 
-  const {name, login, password} = user;
+  const { name, login, password } = user;
 
   findedUser.name = name
   findedUser.login = login

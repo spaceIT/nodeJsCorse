@@ -12,31 +12,31 @@ router.route('/').post(async (req, res) => {
     const { id, title, columns } = req.body;
 
     const board = await boardsService.createBoard({ id, title, columns });
+
     res.status(201).send(Board.toResponse(board));
   } catch {
-    res.status(400).send({error: 'Bad request'})
+    res.status(400).send({ error: 'Bad request' })
   }
-
 });
 
 router.route('/:id').get(async (req, res) => {
   const { id } = req.params;
   const board = await boardsService.getById(id);
 
-  if(board){
+  if (board)
     res.json(Board.toResponse(board));
-  } else {
+  else
     res.status(404).send('Board not found')
-  }
+
 });
 
 router.route('/:id').delete(async (req, res) => {
   try {
-  const { id } = req.params;
-  await boardsService.deleteById(id);
+    const { id } = req.params;
+    await boardsService.deleteById(id);
 
     res.status(204).send('The board has been deleted');
-  } catch(e) {
+  } catch (e) {
     res.status(404).send('Board not found');
   }
 });
@@ -50,7 +50,7 @@ router.route('/:id').put(async (req, res) => {
     const board = await boardsService.updateById({ id, title, columns });
 
     res.status(200).send(Board.toResponse(board));
-  } catch(e) {
+  } catch (e) {
     res.status(404).send('Board not found');
   }
 });

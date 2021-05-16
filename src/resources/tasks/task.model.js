@@ -1,4 +1,4 @@
-const {v4: uuid} = require('uuid');
+const { v4: uuid } = require('uuid');
 
 
 class Task {
@@ -9,7 +9,7 @@ class Task {
     description = "description",
     boardId = null,
     userId = null,
-    columnId= null
+    columnId = null
   } = {}) {
     this.id = id;
     this.title = title;
