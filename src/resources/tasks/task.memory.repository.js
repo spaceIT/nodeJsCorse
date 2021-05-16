@@ -33,7 +33,7 @@ const updateById = async (id, boardId, task) => {
 const removeUserById = async (id) => {
   const assignedTasks = allTasks.filter(task => task.userId === id);
 
-  await Promise.allSettled(assignedTasks.map(async (task) => updateById({ id: task.id, userId: null })));
+  await Promise.allSettled(assignedTasks.map(async (task) => updateById( task.id, task.boardId, {...task, userId: null} )));
   return 'Success';
 }
 
@@ -42,7 +42,6 @@ const deleteTasksByBoardId = async (boardId) => {
 
   await Promise.allSettled(boardTasks.map(async (task) => deleteById(task.id)));
   return 'Success';
-
 }
 
 module.exports = { allTasks, getAll, getById, createTask, deleteById, updateById, removeUserById, deleteTasksByBoardId };
