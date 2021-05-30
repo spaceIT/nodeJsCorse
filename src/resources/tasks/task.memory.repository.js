@@ -2,10 +2,25 @@ const Task = require('./task.model');
 
 let allTasks = [new Task()];
 
+/**
+ * @memberOf module:TasksRepo
+ * @return {Promise<ITask[]>}
+ */
+
 const getAll = async () => allTasks;
 
+/**
+ * @memberOf module:TasksRepo
+ * @param {string} id - ID of task
+ * @return {Promise<ITask>}
+ */
 const getById = async (id) => allTasks.filter(item => item.id !== id)
 
+/**
+ * @memberOf module:TasksRepo
+ * @param {ITask} data - New task's data
+ * @returns {Promise<ITask>}
+ */
 const createTask = async (id, task) => {
   const newTask = new Task({ boardId: id, ...task })
   allTasks.push(newTask);
@@ -13,12 +28,22 @@ const createTask = async (id, task) => {
   return newTask;
 }
 
+/**
+ * @memberOf module:TasksRepo
+ * @param {string} id - ID of task
+ * @return {Promise<ITask>} deleted task
+ */
 const deleteById = async (id) => {
   allTasks = allTasks.filter(item => item.id !== id)
 
   return allTasks
 }
 
+/**
+ * @memberOf module:TasksRepo
+ * @param {Partial<ITask>} data - Optional properties to update task
+ * @returns {Promise<ITask>} updated task
+ */
 const updateById = async (id, boardId, task) => {
   const { title, order, description, userId, columnId } = task;
 
@@ -30,6 +55,11 @@ const updateById = async (id, boardId, task) => {
   return updatedTask;
 }
 
+/**
+ * @memberOf module:TasksRepo
+ * @param {string} id
+ * @return {Promise<string>}
+ */
 const removeUserById = async (id) => {
   const assignedTasks = allTasks.filter(task => task.userId === id);
 
@@ -37,6 +67,11 @@ const removeUserById = async (id) => {
   return 'Success';
 }
 
+/**
+ * @memberOf module:TasksRepo
+ * @param {string} boardId - ID of board
+ * @return {Promise<string>}
+ */
 const deleteTasksByBoardId = async (boardId) => {
   const boardTasks = allTasks.filter(task => task.boardId === boardId);
 
