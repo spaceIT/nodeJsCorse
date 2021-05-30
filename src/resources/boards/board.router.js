@@ -2,11 +2,26 @@ const router = require('express').Router();
 const Board = require('./board.model');
 const boardsService = require('./board.service');
 
+
+/**
+ * @name GET_ALL_BOARDS
+ * @memberOf module:BoardsRouter
+ * @function
+ * @route {GET} /boards/
+ * @returns {IBoard[]|Array} Array of boards or empty array
+ */
 router.route('/').get(async (req, res) => {
   const boards = await boardsService.getAll();
   res.json(boards.map(Board.toResponse));
 });
 
+/**
+ * @name CREATE_BOARD
+ * @memberOf module:BoardsRouter
+ * @function
+ * @route {POST} /boards/
+ * @returns {IBoard} created board
+ */
 router.route('/').post(async (req, res) => {
   try {
     const { id, title, columns } = req.body;
@@ -19,6 +34,13 @@ router.route('/').post(async (req, res) => {
   }
 });
 
+/**
+ * @name GET_BOARD_BY_ID
+ * @memberOf module:BoardsRouter
+ * @function
+ * @route {GET} /boards/:id
+ * @returns {IBoard|string} Board object or string if not found
+ */
 router.route('/:id').get(async (req, res) => {
   const { id } = req.params;
   const board = await boardsService.getById(id);
@@ -30,6 +52,13 @@ router.route('/:id').get(async (req, res) => {
 
 });
 
+/**
+ * @name DELETE_BOARD_BY_ID
+ * @memberOf module:BoardsRouter
+ * @function
+ * @route {DELETE} /boards/:id
+ * @returns {IBoard|string} deleted board or string if not found
+ */
 router.route('/:id').delete(async (req, res) => {
   try {
     const { id } = req.params;
@@ -41,7 +70,13 @@ router.route('/:id').delete(async (req, res) => {
   }
 });
 
-
+/**
+ * @name UPDATE_BOARD_BY_ID
+ * @memberOf module:BoardsRouter
+ * @function
+ * @route {PUT} /boards/:id
+ * @returns {IBoard|string} updated board or string if not found
+ */
 router.route('/:id').put(async (req, res) => {
   try {
     const { id } = req.params;
