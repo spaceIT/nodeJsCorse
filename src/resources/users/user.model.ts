@@ -1,7 +1,5 @@
 import { v4 } from 'uuid';
 
-
-
 export interface TypeUser {
   id: string,
   name?: string | undefined,
@@ -11,11 +9,8 @@ export interface TypeUser {
 
 class User implements TypeUser {
   id: string;
-
   name?: string | undefined;
-
   login?: string | undefined;
-
   password?: string | undefined;
 
   constructor({

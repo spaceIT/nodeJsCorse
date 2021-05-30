@@ -3,9 +3,7 @@ import Task, { TypeTask } from './task.model';
 const allTasks = [new Task()];
 
 const getAll = async () => allTasks;
-
 const getById = async (id: string) => allTasks.find(item => item.id === id);
-
 const createTask = async (id: string, task: TypeTask) => {
 
   const newCopyTask = JSON.parse(JSON.stringify(task));
@@ -49,6 +47,7 @@ const removeUserById = async (id: string) => {
   const assignedTasks = allTasks.filter((task) => task.userId === id);
 
   await Promise.allSettled(assignedTasks.map(async (task) => updateById(task.id, task.boardId, { ...task, userId: null })));
+
   return 'Success';
 };
 
@@ -56,6 +55,7 @@ const deleteTasksByBoardId = async (boardId: string) => {
   const boardTasks = allTasks.filter(task => task.boardId === boardId);
 
   await Promise.allSettled(boardTasks.map(async (task) => deleteById(task.id)));
+
   return 'Success';
 };
 

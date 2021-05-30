@@ -1,13 +1,9 @@
 import Board, { TypeBoard } from './board.model';
 
-
-
 const allBoards = [new Board()];
 
 const getAll = async () => allBoards;
-
 const getById = async (id: string) => allBoards.find((board) => board.id === id);
-
 const createBoard = async ({ id, title, columns }: TypeBoard) => {
   const board = new Board({ id, title, columns });
 
@@ -40,7 +36,5 @@ const updateById = async ({ id, title, columns }: TypeBoard) => {
     return newBoard;
   }
 };
-
-
 
 export default { allBoards, getAll, getById, createBoard, deleteById, updateById };

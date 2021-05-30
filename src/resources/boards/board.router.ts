@@ -43,7 +43,6 @@ router.route('/:id').delete(async (req: express.Request, res: express.Response) 
   }
 });
 
-
 router.route('/:id').put(async (req: express.Request, res: express.Response) => {
   try {
     const { id } = req.params;

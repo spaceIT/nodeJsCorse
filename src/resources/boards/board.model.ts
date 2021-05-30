@@ -1,7 +1,5 @@
 import { v4 } from 'uuid';
 
-
-
 export interface TypeIcolumn {
   id: string,
   title: string,
@@ -14,12 +12,9 @@ export interface TypeBoard {
   columns?: TypeIcolumn[] | undefined,
 }
 
-
 class Board implements TypeBoard {
   id: string | undefined;
-
   title: string | undefined;
-
   columns: TypeIcolumn[] | undefined;
 
   constructor({

@@ -4,7 +4,6 @@ import * as usersService from './user.service';
 
 const router = express.Router();
 
-
 router.route('/').get(async (res: express.Response) => {
   const users = await usersService.getAll();
 
@@ -35,7 +34,6 @@ router.route('/:id').delete(async (req: express.Request, res: express.Response) 
 
   res.status(204).send('User deleted');
 });
-
 
 router.route('/:id').put(async (req: express.Request, res: express.Response) => {
   const { id } = req.params;

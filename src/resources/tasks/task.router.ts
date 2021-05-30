@@ -1,5 +1,4 @@
 import express from 'express';
-
 import Task from './task.model';
 import * as tasksService from './task.service';
 
@@ -31,15 +30,14 @@ router.route('/:id').get(async (req: express.Request, res: express.Response) => 
 });
 
 router.route('/:id').delete(async (req: express.Request, res: express.Response) => {
-
   const { id } = req.params;
+
   if (id) {
     const allTasks = await tasksService.deleteById(id);
 
     res.status(204).send(allTasks.map(Task.toResponse));
   }
 });
-
 
 router.route('/:id').put(async (req: express.Request, res: express.Response) => {
   const { id, boardId } = req.params;
