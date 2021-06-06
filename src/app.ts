@@ -8,6 +8,7 @@ import boardRouter from './resources/boards/board.router';
 import taskRouter from './resources/tasks/task.router';
 import {
   logRequest,
+  logErrorHandler,
   uncaughtException,
   unhandledRejection,
 } from './middleware/logger';
@@ -35,5 +36,6 @@ app.use('/', (req, res, next) => {
 app.use('/users', userRouter);
 app.use('/boards/:boardId/tasks', taskRouter);
 app.use('/boards', boardRouter);
+app.use(logErrorHandler);
 
 export default app;

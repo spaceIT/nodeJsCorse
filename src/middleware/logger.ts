@@ -34,6 +34,16 @@ export const logRequest = (req: Request, res: Response, next: NextFunction): voi
     next();
 }
 
+export const logErrorHandler = (error: Error, _: Request, res: Response, next: NextFunction): void => {
+    if(error instanceof Error) {
+        const log = `[${getFormattedDate()}] Error: ${error.stack}`
+        addLogsToFile(log, ERROR_LOGS);
+        res.status(500).send('Something broke');
+    } else {
+        next();
+    }
+}
+
 export const unhandledRejection = (error: Error): void => {
     const log = `[${getFormattedDate()}] UNHANDLED REJECTION: ${error.stack || error.message}`;
 
