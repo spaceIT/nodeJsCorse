@@ -6,6 +6,14 @@ import { fileURLToPath } from 'url';
 import userRouter from './resources/users/user.router';
 import boardRouter from './resources/boards/board.router';
 import taskRouter from './resources/tasks/task.router';
+import {
+  logRequest,
+  uncaughtException,
+  unhandledRejection,
+} from './middleware/logger';
+
+process.on('uncaughtException', uncaughtException)
+process.on('unhandledRejection', unhandledRejection)
 
 const filename = fileURLToPath(import.meta.url);
 const dirName = dirname(filename);
@@ -14,6 +22,7 @@ const swaggerDocument = YAML.load(path.join(dirName, '../doc/api.yaml'));
 
 app.use(express.json());
 app.use('/doc', swaggerUI.serve, swaggerUI.setup(swaggerDocument));
+app.use(logRequest);
 
 app.use('/', (req, res, next) => {
   if (req.originalUrl === '/') {
