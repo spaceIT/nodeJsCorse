@@ -17,4 +17,4 @@ export const handleError = (err: ErrorHandler, res: Response): void => {
     statusCode,
     message
   });
-} 
+}; 
