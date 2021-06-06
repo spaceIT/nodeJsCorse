@@ -47,5 +47,5 @@ process.on('unhandledRejection', (_reason, promise) => {
     logError(error);
   });
 });
-Promise.reject(Error('Oops!'))
+
 export default app;
