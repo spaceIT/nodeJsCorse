@@ -5,12 +5,15 @@ import { logResponse } from '../../middleware/logger';
 
 const router = express.Router();
 
-router.route('/').get(async (res: express.Response) => {
-  const users = await usersService.getAll();
+router.route('/').get(async (_req: express.Request, res: express.Response, next: express.NextFunction) => {
+  try {
+    const users = await usersService.getAll();
 
-  res.json(users.map(User.toResponse));
-  logResponse(res);
-
+    res.json(users.map(User.toResponse));
+    logResponse(res);
+  } catch (e) {
+    next(e);
+  }
 });
 
 router.route('/').post(async (req: express.Request, res: express.Response, next: express.NextFunction) => {

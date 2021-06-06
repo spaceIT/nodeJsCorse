@@ -5,12 +5,15 @@ import * as tasksService from './task.service';
 
 const router = express.Router({ mergeParams: true });
 
-router.route('/').get(async (_req: express.Request, res: express.Response) => {
+router.route('/').get(async (_req: express.Request, res: express.Response, next: express.NextFunction) => {
+  try {
+    const tasks = await tasksService.getAll();
 
-  const tasks = await tasksService.getAll();
-
-  res.json(tasks.map(Task.toResponse));
-  logResponse(res);
+    res.json(tasks.map(Task.toResponse));
+    logResponse(res);
+  } catch (e) {
+    next(e);
+  }
 });
 
 router.route('/').post(async (req: express.Request, res: express.Response, next: express.NextFunction) => {

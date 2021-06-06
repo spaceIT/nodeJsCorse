@@ -6,10 +6,14 @@ import * as boardsService from './board.service';
 const router = express.Router();
 
 
-router.route('/').get(async (_req: express.Request, res: express.Response) => {
-  const boards = await boardsService.getAll();
-  res.json(boards.map(Board.toResponse));
-  logResponse(res);
+router.route('/').get(async (_req: express.Request, res: express.Response, next: express.NextFunction) => {
+  try {
+    const boards = await boardsService.getAll();
+    res.json(boards.map(Board.toResponse));
+    logResponse(res);
+  } catch (error) {
+    next(error);
+  }
 });
 
 router.route('/').post(async (req: express.Request, res: express.Response, next: express.NextFunction) => {
