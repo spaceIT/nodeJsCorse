@@ -9,8 +9,11 @@ export interface TypeUser {
 
 class User implements TypeUser {
   id: string;
+
   name?: string | undefined;
+
   login?: string | undefined;
+
   password?: string | undefined;
 
   constructor({
