@@ -13,6 +13,7 @@ export interface TypeBoard {
 }
 
 class Board implements TypeBoard {
+  
   id: string | undefined;
 
   title: string | undefined;
