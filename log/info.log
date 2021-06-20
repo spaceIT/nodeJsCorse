@@ -1194,3 +1194,4 @@
 {"message":"    URL: GET /boards/773786f1-ee11-40a8-89b2-21e18267ed54/tasks/25ba0189-c59f-4d56-8f0d-f25edea29bc6, PARAMS: {}, BODY: {}","level":"info","timestamp":"2021-06-06T19:36:49.322Z"}
 {"message":"    URL: DELETE /boards/773786f1-ee11-40a8-89b2-21e18267ed54, PARAMS: {}, BODY: {}","level":"info","timestamp":"2021-06-06T19:36:54.313Z"}
 {"message":"    Response status: 204","level":"info","timestamp":"2021-06-06T19:36:54.314Z"}
+{"message":"   500, Internal server error","level":"error","timestamp":"2021-06-06T22:23:36.812Z"}

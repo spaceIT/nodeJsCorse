@@ -1,0 +1,31 @@
+version: "3.9"
+services:
+  node:
+    build: .
+    image: andrey93it/docker-basics-node
+    env_file: .env
+    networks:
+      - app
+    ports:
+      - ${PORT}:${PORT}
+    volumes:
+      - ./src:/usr/app/src/
+      - ./logs:/usr/app/logs/
+      - /app/node_modules
+    depends_on:
+      - db
+    restart: always
+  db:
+    build: ./db
+    image: andrey93it/docker-basics-postgres
+    env_file: .env
+    networks:
+      - app
+    environment:
+      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD}
+      POSTGRES_USER: ${POSTGRES_USER}
+      POSTGRES_DB: ${POSTGRES_DB}
+    restart: always
+
+networks:
+  app:
