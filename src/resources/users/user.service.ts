@@ -10,5 +10,7 @@ const deleteById = (id: string) => {
     tasksRepo.removeUserById(id);
     usersRepo.deleteById(id);
 };
+const getByLogin = async (login: string) =>
+  usersRepo.getByLogin(login);
 
-export { getAll, getById, createUser, updateById, deleteById };
+export { getAll, getById, createUser, updateById, deleteById, getByLogin };
