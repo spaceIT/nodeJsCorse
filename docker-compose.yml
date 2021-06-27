@@ -16,6 +16,11 @@ services:
       - db
     restart: always
   db:
+    env_file:
+      - .env
+    build:
+      context: .
+      dockerfile: Dockerfile.pg
     build: ./db
     image: andrey93it/docker-basics-postgres
     env_file: .env

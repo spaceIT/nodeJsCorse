@@ -20,3 +20,11 @@ https://docs.docker.com/engine/install/ubuntu/
 ```
 docker compose up
 ```
+
+```
+docker exec -it <name or id container> sh
+```
+
+```
+npm run db:init
+```
