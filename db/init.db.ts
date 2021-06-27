@@ -9,3 +9,4 @@ const DEFAULT_USER: IUserDto = {
 
 export const initDB = async (): Promise<boolean> =>
   Boolean((await getByLogin(DEFAULT_USER.login)) || (await createUser(DEFAULT_USER)));
+  
