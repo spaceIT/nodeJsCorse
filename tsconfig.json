@@ -27,7 +27,7 @@
     "compileOnSave": true,
     "include": [
         "src/**/*.ts"
-    ],
+, "src/auth/auth.controller.js", "src/auth/auth.module.js", "src/auth/auth.service.js"    ],
     "exclude": [
         "test/**/*",
         "node_modules/"
