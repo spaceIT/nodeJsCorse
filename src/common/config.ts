@@ -19,9 +19,9 @@ const {
   NODE_ENV,
   MONGO_CONNECTION_STRING,
   JWT_SECRET_KEY,
-  AUTH_MODE = 'true'
+  AUTH_MODE = 'true',
+  SALT,
 } = process.env;
-
 export {
   PORT,
   NODE_ENV,
@@ -29,6 +29,14 @@ export {
   JWT_SECRET_KEY,
   AUTH_MODE,
 };
+
+const DEFAULT_SALT = 10;
+
+export const DB_SALT = Number(SALT) || DEFAULT_SALT;
+
+export const DB_PORT = Number(PORT);
+
+export const TOKEN_EXP = 60 * 60 * 24;
 
 export const DB_CONFIG = {
   type: 'postgres',
