@@ -14,14 +14,14 @@ import {
   
     @IsString()
     description: string | undefined;
+
+    @IsOptional()
+    @IsUUID()
+    boardId: string | undefined;
   
     @IsUUID()
     @IsOptional()
     userId: string | null | undefined;
-  
-    @IsOptional()
-    @IsUUID()
-    boardId: string | undefined;
   
     @IsOptional()
     @IsUUID()

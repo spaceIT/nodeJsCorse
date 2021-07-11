@@ -4,17 +4,18 @@ import { initDB } from './init.db';
 
 const connectToDB = async () => {
     await createConnection(DB_CONFIG);
+
     console.log('DataBase is connected successfully');
 };
 
 export const tryDBConnect = async (cb: () => void): Promise<void> => {
+
     try {
         await connectToDB();
-
         if (await initDB()) {
             console.log('Default user has created');
         } else {
-            console.log('Fail to create default user');
+            console.log('Fail to create user');
         }
         
         cb();

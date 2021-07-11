@@ -25,16 +25,25 @@ import {
     ) {
       return this.taskService.create(boardId, createTaskDto);
     }
+
+    @Get(':id')
+    async getById(@Param('id') id: string, @Param('boardId') boardId: string) {
+      const task = await this.taskService.getById(boardId, id);
+      if (task) return task;
+      throw new HttpException(ReasonPhrases.NOT_FOUND, HttpStatus.NOT_FOUND);
+    }
   
     @Get()
     async getAll(@Param('boardId') boardId: string) {
       return this.taskService.getAll(boardId);
     }
+
+    @Delete(':id')
+    async deleteById(@Param('id') id: string) {
+      const res = await this.taskService.deleteById(id);
   
-    @Get(':id')
-    async getById(@Param('id') id: string, @Param('boardId') boardId: string) {
-      const task = await this.taskService.getById(boardId, id);
-      if (task) return task;
+      if (res) return res;
+  
       throw new HttpException(ReasonPhrases.NOT_FOUND, HttpStatus.NOT_FOUND);
     }
   
@@ -48,13 +57,5 @@ import {
       if (res) return res;
       throw new HttpException(ReasonPhrases.NOT_FOUND, HttpStatus.NOT_FOUND);
     }
-  
-    @Delete(':id')
-    async deleteById(@Param('id') id: string) {
-      const res = await this.taskService.deleteById(id);
-  
-      if (res) return res;
-  
-      throw new HttpException(ReasonPhrases.NOT_FOUND, HttpStatus.NOT_FOUND);
-    }
+     
   }

@@ -11,6 +11,7 @@ import User from './user.entity';
 
 @Entity({ name: 'task' })
 export class Task implements ITask {
+    
   @PrimaryGeneratedColumn('uuid')
   id!: string;
   @Column('varchar', { length: 255 })
